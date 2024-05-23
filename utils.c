@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utlis.c                                            :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mmondad <mmondad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/21 13:37:59 by mmondad           #+#    #+#             */
-/*   Updated: 2024/05/23 09:30:11 by mmondad          ###   ########.fr       */
+/*   Updated: 2024/05/23 14:27:47 by mmondad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,17 +61,16 @@ char	*ft_strdup(t_info *info, t_split data)
 	cpy = malloc(len + 1);
 	if (!cpy)
 		free_list(info);
-	data.i = 0;
-	while (info->line[data.i] && !check_sep(info->line[data.i]))
+	while (info->line[info->i] && !check_sep(info->line[info->i]))
 	{
-		if (info->line[data.i] == '\"' || info->line[data.i] == '\'')
+		if (info->line[info->i] == '\"' || info->line[info->i] == '\'')
 		{
-			data.tmp = info->line[data.i++];
-			while (info->line[data.i] && info->line[data.i++] != data.tmp)
-				cpy[data.j++] = info->line[data.i - 1];
+			data.tmp = info->line[info->i++];
+			while (info->line[info->i] && info->line[info->i++] != data.tmp)
+				cpy[data.j++] = info->line[info->i - 1];
 		}
 		else
-			cpy[data.j++] = info->line[data.i++];
+			cpy[data.j++] = info->line[info->i++];
 	}
 	cpy[len] = '\0';
 	return (cpy);

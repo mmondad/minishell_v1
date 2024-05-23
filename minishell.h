@@ -6,7 +6,7 @@
 /*   By: mmondad <mmondad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/18 13:36:40 by mmondad           #+#    #+#             */
-/*   Updated: 2024/05/23 10:51:25 by mmondad          ###   ########.fr       */
+/*   Updated: 2024/05/23 14:20:31 by mmondad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,21 +28,20 @@
 
 typedef struct s_list
 {
+	char **patrs;
 	char *txt;
 	int	type;
 	struct s_list *next;
 }	t_list;
 
-// typedef struct s_plist
-// {
-// 	char **
-// }	t_plist;
-
 typedef struct s_info
 {
+	int		i;
 	char	*line;
 	t_list	*list;
+	t_list	*plist;
 	char	*tmp_line;
+	int		lst_size;
 
 }	t_info;
 
@@ -56,8 +55,7 @@ typedef struct s_split
 
 void	ft_split(t_info *info);
 void	print_error(char *msg, int ext, int fd);
-void	add_back(t_list **list, t_list *new_node);
-t_list	*new_node(char *str, int type, t_info *info);
+void	new_node(char *str, int type, t_info *info);
 int		check_token(char c);
 int		check_sep(char c);
 int		ft_strcmp(const char *s1, const char *s2);

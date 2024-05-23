@@ -6,11 +6,26 @@
 /*   By: mmondad <mmondad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/18 15:57:53 by mmondad           #+#    #+#             */
-/*   Updated: 2024/05/23 10:51:34 by mmondad          ###   ########.fr       */
+/*   Updated: 2024/05/23 16:23:28 by mmondad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+void	create_plist(t_info *info)
+{
+	t_list *lst;
+
+	lst = info->list;
+	while (lst)
+	{
+		if (lst->type != PIPE)
+		{
+			
+		}
+		lst = lst->next;
+	}
+}
 
 int		check_quotes(char *line)
 {
@@ -61,7 +76,9 @@ int main(void)
 			info.line++;
 		if (!check_quotes(info.tmp_line))
 		{
+			info.lst_size = 0;
 			ft_split(&info);
+			create_plist(&info);
 			print_list(info);
 		}
 		else

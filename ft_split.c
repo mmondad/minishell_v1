@@ -6,7 +6,7 @@
 /*   By: mmondad <mmondad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/18 15:53:20 by mmondad           #+#    #+#             */
-/*   Updated: 2024/05/23 10:11:38 by mmondad          ###   ########.fr       */
+/*   Updated: 2024/05/23 14:27:42 by mmondad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,17 +55,13 @@ int	add_token(t_info *info)
 	int		i;
 	int		type;
 	int		size;
-	t_list	*node;
 
 	i = 0;
 	size = 0;
 	while (info->line[i] && info->line[i] == ' ')
 		i++;
 	if (info->line[i] && check_token(info->line[i]))
-	{
-		node = new_node(token(info->line + i, &type, &size, info), type, info);
-		add_back(&info->list, node);
-	}
+		new_node(token(info->line + i, &type, &size, info), type, info);
 	while (info->line[i] && info->line[i] == ' ')
 		i++;
 	return (size + i);
@@ -74,27 +70,15 @@ int	add_token(t_info *info)
 void	ft_split(t_info *info)
 {
 	t_split	data;
-	t_list	*node;
 
 	data.i = 0;
 	while (*info->line)
 	{
+		info->i = 0;
 		info->line += add_token(info);
 		if (*info->line && !check_sep(*info->line))
-		{
-			node = new_node(ft_strdup(info, data), WORD, info);
-			add_back(&info->list, node);
-		}
-		while (*info->line && !check_sep(*info->line))
-		{
-			if (*info->line == '\"' ||  *info->line == '\'')
-			{
-				info->line++;
-				while (*info->line && *info->line != '\"' && *info->line != '\'')
-					info->line++;
-			}
-			info->line++;
-		}
+			new_node(ft_strdup(info, data), WORD, info);
+		info->line += info->i;
 		info->line += add_token(info);
 	}
 }
