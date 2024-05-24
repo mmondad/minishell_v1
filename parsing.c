@@ -6,24 +6,47 @@
 /*   By: mmondad <mmondad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/18 15:57:53 by mmondad           #+#    #+#             */
-/*   Updated: 2024/05/23 16:23:28 by mmondad          ###   ########.fr       */
+/*   Updated: 2024/05/24 13:53:09 by mmondad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+int	p_len(t_list *list)
+{
+	int len;
+
+	len = 0;
+	while (list && list->type != PIPE)
+	{
+		len++;
+		list = list->next;
+	}
+	return (len);
+}
+
 void	create_plist(t_info *info)
 {
 	t_list *lst;
+	t_plist	*node;
 
+	info->plist = NULL;
 	lst = info->list;
 	while (lst)
 	{
-		if (lst->type != PIPE)
+		info->i = 0;
+		node = new_pnode(info, p_len(lst));
+		while (lst && lst->type != PIPE)
 		{
-			
+			node->parts[info->i] = lst->txt;
+			node->types[info->i] = lst->type;
+			lst = lst->next;
+			info->i++;
 		}
-		lst = lst->next;
+		node->parts[info->i] = NULL;
+		add_back_p(&info->plist, node);
+		if (lst)
+			lst = lst->next;
 	}
 }
 
@@ -79,7 +102,9 @@ int main(void)
 			info.lst_size = 0;
 			ft_split(&info);
 			create_plist(&info);
-			print_list(info);
+			print_list2(info);
+			//printf("----------------------\n");
+			//print_list(info);
 		}
 		else
 			printf("stx_error\n");

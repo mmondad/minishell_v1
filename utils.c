@@ -6,31 +6,29 @@
 /*   By: mmondad <mmondad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/21 13:37:59 by mmondad           #+#    #+#             */
-/*   Updated: 2024/05/23 14:27:47 by mmondad          ###   ########.fr       */
+/*   Updated: 2024/05/23 18:28:24 by mmondad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int len_f(char *s1, t_split data)
+void	len_f(char *s1, t_split *data)
 {
-	data.i = 0;
-	data.len = 0;
-	while (s1[data.i] && !check_sep(s1[data.i]))
+	data->len = 0;
+	while (s1[data->i] && !check_sep(s1[data->i]))
 	{
-		if (s1[data.i] == '\'' || s1[data.i] == '\"')
+		if (s1[data->i] == '\'' || s1[data->i] == '\"')
 		{
-			data.tmp = s1[data.i++];
-			while (s1[data.i] && s1[data.i++] != data.tmp)
-				data.len++;
+			data->tmp = s1[data->i++];
+			while (s1[data->i] && s1[data->i++] != data->tmp)
+				data->len++;
 		}
 		else
 		{
-			data.i++;
-			data.len++;
+			data->i++;
+			data->len++;
 		}
 	}
-	return (data.len);
 }
 
 int	ft_strcmp(const char *s1, const char *s2)
@@ -54,11 +52,10 @@ int	ft_strcmp(const char *s1, const char *s2)
 char	*ft_strdup(t_info *info, t_split data)
 {
 	char	*cpy;
-	int		len;
 
 	data.j = 0;
-	len = len_f(info->line, data);
-	cpy = malloc(len + 1);
+	len_f(info->line, &data);
+	cpy = malloc(data.len + 1);
 	if (!cpy)
 		free_list(info);
 	while (info->line[info->i] && !check_sep(info->line[info->i]))
@@ -72,6 +69,6 @@ char	*ft_strdup(t_info *info, t_split data)
 		else
 			cpy[data.j++] = info->line[info->i++];
 	}
-	cpy[len] = '\0';
+	cpy[data.len] = '\0';
 	return (cpy);
 }
