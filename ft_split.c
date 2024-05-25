@@ -6,7 +6,7 @@
 /*   By: mmondad <mmondad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/18 15:53:20 by mmondad           #+#    #+#             */
-/*   Updated: 2024/05/23 18:41:09 by mmondad          ###   ########.fr       */
+/*   Updated: 2024/05/24 20:31:18 by mmondad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ int	add_token(t_info *info)
 		i++;
 	if (info->line[i] && check_token(info->line[i]))
 		new_node(token(info->line + i, &type, &size, info), type, info);
-	while (info->line[i] && info->line[i] == ' ')
+	while (info->line[i + size] && info->line[i + size] == ' ')
 		i++;
 	return (size + i);
 }
@@ -76,7 +76,8 @@ void	ft_split(t_info *info)
 	{
 		info->i = 0;
 		info->line += add_token(info);
-		new_node(ft_strdup(info, data), WORD, info);
+		if (*info->line && !check_token(*info->line))
+			new_node(ft_strdup(info, data), WORD, info);
 		info->line += info->i;
 		info->line += add_token(info);
 	}

@@ -6,30 +6,11 @@
 /*   By: mmondad <mmondad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/21 13:37:59 by mmondad           #+#    #+#             */
-/*   Updated: 2024/05/23 18:28:24 by mmondad          ###   ########.fr       */
+/*   Updated: 2024/05/25 09:29:36 by mmondad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-void	len_f(char *s1, t_split *data)
-{
-	data->len = 0;
-	while (s1[data->i] && !check_sep(s1[data->i]))
-	{
-		if (s1[data->i] == '\'' || s1[data->i] == '\"')
-		{
-			data->tmp = s1[data->i++];
-			while (s1[data->i] && s1[data->i++] != data->tmp)
-				data->len++;
-		}
-		else
-		{
-			data->i++;
-			data->len++;
-		}
-	}
-}
 
 int	ft_strcmp(const char *s1, const char *s2)
 {

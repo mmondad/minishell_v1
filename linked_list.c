@@ -6,7 +6,7 @@
 /*   By: mmondad <mmondad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/21 09:39:20 by mmondad           #+#    #+#             */
-/*   Updated: 2024/05/24 12:35:45 by mmondad          ###   ########.fr       */
+/*   Updated: 2024/05/25 10:13:54 by mmondad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,7 @@
 void	add_back(t_list **list, t_list *new_node)
 {
 	t_list *tmp;
-	
-	if (!new_node->txt[0])
-		return (free(new_node));
+
 	tmp = *list;
 	if (*list)
 	{
@@ -71,4 +69,29 @@ t_plist	*new_pnode(t_info *info, int len)
 		free_list (info);
 	node->next = NULL;
 	return (node);
+}
+
+void	create_plist(t_info *info)
+{
+	t_list *lst;
+	t_plist	*node;
+
+	info->plist = NULL;
+	lst = info->list;
+	while (lst)
+	{
+		info->i = 0;
+		node = new_pnode(info, p_len(lst));
+		while (lst && lst->type != PIPE)
+		{
+			node->parts[info->i] = lst->txt;
+			node->types[info->i] = lst->type;
+			lst = lst->next;
+			info->i++;
+		}
+		node->parts[info->i] = NULL;
+		add_back_p(&info->plist, node);
+		if (lst)
+			lst = lst->next;
+	}
 }

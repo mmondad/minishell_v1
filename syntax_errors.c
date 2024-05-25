@@ -1,37 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing.c                                          :+:      :+:    :+:   */
+/*   syntax_errors.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mmondad <mmondad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/18 15:57:53 by mmondad           #+#    #+#             */
-/*   Updated: 2024/05/25 10:19:40 by mmondad          ###   ########.fr       */
+/*   Created: 2024/05/24 18:14:24 by mmondad           #+#    #+#             */
+/*   Updated: 2024/05/25 09:23:16 by mmondad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int main(void)
+int	stx_errors(t_info info)
 {
-	t_info	info;
+	t_list *list = info.list;
 
-	while (1)
+	if (list->type == PIPE)
+		return (1);
+	while (list)
 	{
-		info.line = readline ("minishell-0.0$ ");
-		if (info.line)
-			add_history(info.line);
-		info.tmp_line = info.line;
-		while (*info.line && *info.line == ' ')
-		info.line++;
-		ft_split(&info);
-		create_plist(&info);
-		if (!stx_errors(info))
-		{
-			
-		}
-		else
-			printf("stx_error\n");
-		free_list(&info);
+		if ((list->next && list->type != WORD && list->next->type == PIPE) || !list->type)
+			return (1);
+		if ((!list->next && list->type != WORD) || check_quotes(info.tmp_line))
+			return (1);
+		list = list->next;
 	}
+	return (0);
 }
