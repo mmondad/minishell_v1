@@ -6,7 +6,7 @@
 /*   By: mmondad <mmondad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 18:14:24 by mmondad           #+#    #+#             */
-/*   Updated: 2024/05/25 09:23:16 by mmondad          ###   ########.fr       */
+/*   Updated: 2024/05/25 16:03:27 by mmondad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int	stx_errors(t_info info)
 {
 	t_list *list = info.list;
 
-	if (list->type == PIPE)
+	if (list && list->type == PIPE)
 		return (1);
 	while (list)
 	{

@@ -6,7 +6,7 @@
 /*   By: mmondad <mmondad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/25 09:40:27 by mmondad           #+#    #+#             */
-/*   Updated: 2024/05/25 10:16:52 by mmondad          ###   ########.fr       */
+/*   Updated: 2024/05/25 13:01:07 by mmondad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int	check_quotes(char *line)
 
 int check_escape(char c)
 {
-	if ((c == 32 || c >= 9) && c <= 13)
+	if (c == 32 || (c >= 9 && c <= 13))
 		return (1);
 	return (0);
 }
