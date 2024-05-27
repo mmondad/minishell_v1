@@ -6,7 +6,7 @@
 /*   By: mmondad <mmondad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/25 09:29:13 by mmondad           #+#    #+#             */
-/*   Updated: 2024/05/25 09:31:48 by mmondad          ###   ########.fr       */
+/*   Updated: 2024/05/27 12:41:47 by mmondad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,17 +31,24 @@ void	len_f(char *s1, t_split *data)
 	}
 }
 
-int	p_len(t_list *list)
+void	p_len(t_info *info)
 {
-	int len;
+	t_list *lst;
 
-	len = 0;
-	while (list && list->type != PIPE)
+	lst = info->list;
+	info->reds_l = 0;
+	info->parts_l = 0;
+	while (lst && lst->type != PIPE)
 	{
-		len++;
-		list = list->next;
+		if (lst->type > PIPE)
+		{
+			info->reds_l += 2;
+			lst = lst->next;
+		}
+		else
+			info->parts_l++;
+		lst = lst->next;
 	}
-	return (len);
 }
 
 int	ft_strlen(char *str)

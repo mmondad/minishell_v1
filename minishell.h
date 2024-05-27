@@ -6,7 +6,7 @@
 /*   By: mmondad <mmondad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/18 13:36:40 by mmondad           #+#    #+#             */
-/*   Updated: 2024/05/25 20:15:53 by mmondad          ###   ########.fr       */
+/*   Updated: 2024/05/27 18:28:21 by mmondad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@
 typedef struct s_plist
 {
 	char			**parts;
+	char			**reds;
 	int				*types;
 	struct s_plist	*next;
 }	t_plist;
@@ -43,10 +44,13 @@ typedef struct s_list
 typedef struct s_info
 {
 	int		i;
+	int		j;
 	char	*line;
 	t_list	*list;
 	t_plist	*plist;
 	char	*tmp_line;
+	int		parts_l;
+	int		reds_l;
 }	t_info;
 
 typedef struct s_split
@@ -58,9 +62,9 @@ typedef struct s_split
 }	t_split;
 
 		/*   length   */
-int		p_len(t_list *list);
-int		ft_strlen(char *str);
 void	len_f(char *s1, t_split *data);
+int		ft_strlen(char *str);
+void	p_len(t_info *info);
 
 		/*   validators   */
 int		check_escape(char c);

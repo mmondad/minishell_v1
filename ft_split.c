@@ -6,7 +6,7 @@
 /*   By: mmondad <mmondad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/18 15:53:20 by mmondad           #+#    #+#             */
-/*   Updated: 2024/05/25 12:09:37 by mmondad          ###   ########.fr       */
+/*   Updated: 2024/05/27 16:53:28 by mmondad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,7 @@ void	ft_split(t_info *info)
 	t_split	data;
 
 	data.i = 0;
+	
 	while (*info->line)
 	{
 		info->i = 0;

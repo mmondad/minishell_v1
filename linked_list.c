@@ -6,7 +6,7 @@
 /*   By: mmondad <mmondad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/21 09:39:20 by mmondad           #+#    #+#             */
-/*   Updated: 2024/05/25 10:13:54 by mmondad          ###   ########.fr       */
+/*   Updated: 2024/05/27 20:32:04 by mmondad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,15 +56,20 @@ void	add_back_p(t_plist **list, t_plist *new_node)
 		(*list) = new_node;
 }
 
-t_plist	*new_pnode(t_info *info, int len)
+t_plist	*new_pnode(t_info *info)
 {
 	t_plist *node;
 
 	node = malloc(sizeof (t_plist));
 	if (!node)
 		free_list(info);
-	node->parts = malloc (sizeof (char *) * (len + 1));
-	node->types = malloc(sizeof (int) * len);
+	node->parts = NULL;
+	node->reds = NULL;
+	node->parts = malloc (sizeof (char *) * (info->parts_l + 1));
+	if (info->reds_l)
+		node->reds = malloc (sizeof (char *) * (info->reds_l + 1));
+	if (info->reds_l)
+		node->types = malloc(sizeof (int) * (info->reds_l));
 	if (!node->parts || !node->types)
 		free_list (info);
 	node->next = NULL;
@@ -81,15 +86,27 @@ void	create_plist(t_info *info)
 	while (lst)
 	{
 		info->i = 0;
-		node = new_pnode(info, p_len(lst));
+		info->j = 0;
+		p_len(info);
+		node = new_pnode(info);
 		while (lst && lst->type != PIPE)
 		{
-			node->parts[info->i] = lst->txt;
-			node->types[info->i] = lst->type;
+			if (lst->type > PIPE)
+			{
+				node->reds[info->i] = lst->txt;
+				node->types[info->i++] = lst->type;
+				node->reds[info->i] = lst->next->txt;
+				node->types[info->i++] = lst->next->type;
+				lst = lst->next;
+			}
+			else
+				node->parts[info->j++] = lst->txt;
 			lst = lst->next;
-			info->i++;
 		}
-		node->parts[info->i] = NULL;
+		if (node->parts)
+			node->parts[info->j] = NULL;
+		if (node->reds)
+			node->reds[info->i] = NULL;
 		add_back_p(&info->plist, node);
 		if (lst)
 			lst = lst->next;

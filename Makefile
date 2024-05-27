@@ -6,14 +6,14 @@
 #    By: mmondad <mmondad@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/22 18:56:53 by mmondad           #+#    #+#              #
-#    Updated: 2024/05/25 10:17:59 by mmondad          ###   ########.fr        #
+#    Updated: 2024/05/27 14:55:37 by mmondad          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC = cc
 SRS = ft_split.c linked_list.c parsing.c free_memory.c print.c utils.c syntax_errors.c validators.c length.c
 OBJCTS = $(SRS:.c=.o)
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -fsanitize=address -g3
 NAME = minishell
 
 all : $(NAME)

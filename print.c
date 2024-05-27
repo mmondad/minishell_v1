@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   errors.c                                           :+:      :+:    :+:   */
+/*   print.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mmondad <mmondad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/19 19:45:31 by mmondad           #+#    #+#             */
-/*   Updated: 2024/05/24 13:42:14 by mmondad          ###   ########.fr       */
+/*   Updated: 2024/05/27 20:33:14 by mmondad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,18 @@
 void	print_list2(t_info info)
 {
 	int i;
+	int	j;
 	int count = 1;
 
 	while (info.plist)
 	{
 		i = -1;
+		j = -1;
 		printf("part[%d]\n", count);
-		while (info.plist->parts[++i])
-			printf("[%s] type --> %d\n", info.plist->parts[i], info.plist->types[i]);
+		while (info.plist->parts && info.plist->parts[++i])
+			printf("[%s]\n", info.plist->parts[i]);
+		while (info.plist->reds && info.plist->reds[++j])
+			printf("[%s] type--> [%d]\n", info.plist->reds[j], info.plist->types[j]);
 		count++;
 		info.plist = info.plist->next;
 	}
