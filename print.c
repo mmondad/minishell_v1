@@ -6,11 +6,20 @@
 /*   By: mmondad <mmondad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/19 19:45:31 by mmondad           #+#    #+#             */
-/*   Updated: 2024/05/27 20:33:14 by mmondad          ###   ########.fr       */
+/*   Updated: 2024/06/01 20:37:57 by mmondad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+void	print_env(t_env *head)
+{
+	while (head)
+	{
+		printf("%s\n", head->line);
+		head = head->next;
+	}
+}
 
 void	print_list2(t_info info)
 {

@@ -6,7 +6,7 @@
 /*   By: mmondad <mmondad@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/25 09:40:27 by mmondad           #+#    #+#             */
-/*   Updated: 2024/05/25 13:01:07 by mmondad          ###   ########.fr       */
+/*   Updated: 2024/06/02 11:20:19 by mmondad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,9 @@ int	check_quotes(char *line)
 	int		flag;
 
 	tmp = 0;
-	i = -1;
+	i = 0;
 	flag = 0;
-	while (line[++i])
+	while (line[i])
 	{
 		if ((line[i] == '\'' || line[i] == '\"') && !flag)
 		{
@@ -30,6 +30,8 @@ int	check_quotes(char *line)
 		}
 		if (line[i] && line[i] == tmp && flag)
 			flag = 0;
+		if (line[i])
+			i++;
 	}
 	return (flag);
 }
@@ -51,6 +53,15 @@ int	check_sep(char c)
 int	check_token(char c)
 {
 	if (c == '<' || c == '>' || c == '|')
+		return (1);
+	return (0);
+}
+
+int	alpha_n(char c)
+{
+	if ((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z'))
+		return (1);
+	if ((c >= '0' && c <= '9') || c == '_')
 		return (1);
 	return (0);
 }

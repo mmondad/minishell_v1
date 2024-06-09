@@ -11,17 +11,19 @@
 # **************************************************************************** #
 
 CC = cc
-SRS = ft_split.c linked_list.c parsing.c free_memory.c print.c utils.c syntax_errors.c validators.c length.c
+NAME = minishell
+SRS = ft_split.c linked_list.c parsing.c free_memory.c print.c utils.c syntax_errors.c validators.c length.c expand.c creat_node.c
 OBJCTS = $(SRS:.c=.o)
 CFLAGS = -Wall -Wextra -Werror -fsanitize=address -g3
-NAME = minishell
 
 all : $(NAME)
 
 $(NAME) : $(OBJCTS)
 	$(CC) $(CFLAGS) $(OBJCTS) -o $(NAME) -lreadline
+
 clean :
 	rm -rf $(OBJCTS)
 fclean : clean
 	rm -rf $(NAME)
+
 re : fclean all

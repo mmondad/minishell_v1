@@ -72,8 +72,7 @@ void	ft_split(t_info *info)
 	t_split	data;
 
 	data.i = 0;
-	
-	while (*info->line)
+	while (info->line && (*info->line))
 	{
 		info->i = 0;
 		info->line += add_token(info);
