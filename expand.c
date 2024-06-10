@@ -94,11 +94,9 @@ char *b_dollar(t_info *info)
 
 char *expand(t_info *info)
 {
-    int i;
     char *str;
     char *part;
 
-    i = 0;
     str = NULL;
     while (info->line[info->count])
     {
