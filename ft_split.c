@@ -61,7 +61,10 @@ int	add_token(t_info *info)
 	while (info->line[i] && check_escape(info->line[i]))
 		i++;
 	if (info->line[i] && check_token(info->line[i]))
-		new_node(token(info->line + i, &type, &size, info), type, info);
+	{
+		char *str = token(info->line + i, &type, &size, info);
+		new_node(str, type, info);
+	}
 	while (info->line[i + size] &&  check_escape(info->line[i + size]))
 		i++;
 	return (size + i);
