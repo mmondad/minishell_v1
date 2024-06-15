@@ -64,6 +64,7 @@ int main(int argc, char **argv, char **penv)
 		info.tmp_line = info.line;
 		info.list = NULL;
 		ft_split(&info);
+		// print_list(info);
 		if (!stx_errors(info))
 		{
 			create_plist(&info);

@@ -64,6 +64,7 @@ typedef struct s_info
 	int		count;
 	t_env	*head_e;
 	int		quotes;
+	int		flag;
 }	t_info;
 
 
@@ -78,8 +79,9 @@ typedef struct s_split
 		/*   length   */
 void	len_f(char *s1, t_split *data);
 int		ft_strlen(char *str);
-void	p_len(t_info *info);
 int		until_d(char *str, t_info *info);
+void	set_val(char c, t_info *info);
+void	p_len(t_list *lst, t_info *info);
 
 		/*   validators   */
 int		check_escape(char c);

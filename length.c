@@ -58,11 +58,8 @@ int	until_d(char *str, t_info *info)
 	return (i);
 }
 
-void	p_len(t_info *info)
+void	p_len(t_list *lst, t_info *info)
 {
-	t_list *lst;
-
-	lst = info->list;
 	info->reds_l = 0;
 	info->parts_l = 0;
 	while (lst && lst->type != PIPE)

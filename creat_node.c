@@ -23,7 +23,10 @@ t_plist	*new_pnode(t_info *info)
 	node->reds = NULL;
 	node->parts = malloc (sizeof (char *) * (info->parts_l + 1));
 	if (info->reds_l)
+	{
+		printf("simo\n");
 		node->reds = malloc (sizeof (char *) * (info->reds_l + 1));
+	}
 	if (info->reds_l)
 		node->types = malloc(sizeof (int) * (info->reds_l));
 	if (!node->parts || !node->types)

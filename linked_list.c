@@ -70,7 +70,7 @@ void	create_plist(t_info *info)
 	{
 		info->i = 0;
 		info->j = 0;
-		p_len(info);
+		p_len(lst, info);
 		node = new_pnode(info);
 		while (lst && lst->type != PIPE)
 		{
