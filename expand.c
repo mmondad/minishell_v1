@@ -44,6 +44,7 @@ char *fake_var(t_info *info, int i)
 	}
 	info->flag = 0;
 	str = malloc(i + 1);
+	new_fnode(str, info);
 	i = 0;
 	while (info->line[info->count] && !alpha_n(info->line[info->count]) && dollar(info->line[info->count], info))
 		str[i++] = info->line[info->count++];
@@ -58,6 +59,7 @@ char *get_line(t_info *info, int j)
 
 	len = until_d(info->head_e->line + j, info);
  	str = malloc(len + 1);
+	new_fnode(str, info);
 	len = 0;
 	info->count += j;
 	while (info->head_e->line[j])
@@ -104,6 +106,7 @@ char *b_dollar(t_info *info)
 
 	len = until_d(info->line + info->count, info);
 	str = malloc(len + 1);
+	new_fnode(str, info);
 	i = 0;
 	while (info->line[info->count] && info->line[info->count] != '$')
 		str[i++] = info->line[info->count++];
@@ -123,8 +126,9 @@ char *expand(t_info *info)
             part = cmp_f(info, info->count + 1);
         else
            part = b_dollar(info);
-        str = ft_strjoin(str, part);
+        str = ft_strjoin(str, part, info);
     }
+	free(info->line);
     return (str);
 }
  

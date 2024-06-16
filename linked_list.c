@@ -12,6 +12,22 @@
 
 #include "minishell.h"
 
+void	add_back_h(t_heapnode **list, t_heapnode *new_node)
+{
+	t_heapnode *tmp;
+
+	tmp = *list;
+	if (*list)
+	{
+		while ((*list)->next)
+			(*list) = (*list)->next;
+		(*list)->next = new_node;
+		*list = tmp;
+	}
+	else
+		(*list) = new_node;
+}
+
 void	add_back(t_list **list, t_list *new_node)
 {
 	t_list *tmp;

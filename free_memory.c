@@ -14,17 +14,13 @@
 
 void	free_list(t_info	*info)
 {
-	// t_list *tmp;
+	t_heapnode *tmp;
 
-	(void)info;
-	// (void)info;
-
-	// while (info->list)
-	// {
-	// 	tmp = info->list;
-	// 	free(tmp->txt);
-	// 	info->list = info->list->next;
-	// 	free(tmp);
-	// }
-	// free(info->tmp_line);
+	while (info->head_h)
+	{
+		tmp = info->head_h;
+		info->head_h = info->head_h->next;
+		free(tmp->data);
+		free(tmp);
+	}
 }

@@ -33,6 +33,7 @@ char	*token(char *line, int *type, int *size, t_info *info)
 	char	tmp;
 	int		len;
 	char	*token;
+	(void)info;
 
 	len = 0;
 	tmp = line[0];
@@ -40,8 +41,7 @@ char	*token(char *line, int *type, int *size, t_info *info)
 		len++;
 	*size = len;
 	token = malloc(len + 1);
-	if (!token)
-		free_list(info); 
+	new_fnode(token, info);
 	len = -1;
 	while (tmp == line[++len])
 		token[len] = line[len];

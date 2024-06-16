@@ -12,7 +12,7 @@
 
 #include "minishell.h"
 
-t_env	*cpy_env(char **env)
+t_env	*cpy_env(char **env, t_info *info)
 {
 	int i;
 	int j;
@@ -24,8 +24,9 @@ t_env	*cpy_env(char **env)
 	while (env[i])
 	{
 		j = 0;
-		node = new_node_e();
+		node = new_node_e(info);
 		node->line = malloc(ft_strlen(env[i]) + 1);
+		new_fnode(node->line, info);
 		while (env[i][j])
 		{
 			node->line[j] = env[i][j];
@@ -45,7 +46,8 @@ void init_info(int ac, char **av, char **env, t_info *info)
 	info->penv = env;
 	info->count = 0;
 	info->quotes = 0;
-	info->head_e = cpy_env(env);
+	info->head_h = NULL;
+	info->head_e = cpy_env(env, info);
 	info->plist = NULL;
 }
 
@@ -64,7 +66,6 @@ int main(int argc, char **argv, char **penv)
 		info.tmp_line = info.line;
 		info.list = NULL;
 		ft_split(&info);
-		// print_list(info);
 		if (!stx_errors(info))
 		{
 			create_plist(&info);

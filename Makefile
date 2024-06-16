@@ -14,7 +14,7 @@ CC = cc
 NAME = minishell
 SRS = ft_split.c linked_list.c parsing.c free_memory.c print.c utils.c syntax_errors.c validators.c length.c expand.c creat_node.c
 OBJCTS = $(SRS:.c=.o)
-CFLAGS = -Wall -Wextra -Werror -fsanitize=address -g3
+CFLAGS = -Wall -Wextra -Werror
 
 all : $(NAME)
 
