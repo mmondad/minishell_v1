@@ -109,5 +109,6 @@ void	create_plist(t_info *info)
 		add_back_p(&info->plist, node);
 		if (lst)
 			lst = lst->next;
+		info->lst_size++;
 	}
 }

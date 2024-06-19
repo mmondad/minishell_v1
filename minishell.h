@@ -72,6 +72,7 @@ typedef struct s_info
 	int			count;
 	int			quotes;
 	int			flag;
+	int			lst_size;
 }	t_info;
 
 

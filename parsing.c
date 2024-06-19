@@ -44,6 +44,7 @@ void init_info(int ac, char **av, char **env, t_info *info)
 	info->argc = ac;
 	info->argv = av;
 	info->penv = env;
+	info->lst_size = -1;
 	info->count = 0;
 	info->quotes = 0;
 	info->head_h = NULL;
